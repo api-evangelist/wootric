@@ -1,0 +1,128 @@
+vocabulary:
+  name: Wootric API Vocabulary
+  description: Domain terms and concepts used in the Wootric customer experience platform API
+  version: '1.0'
+  source: https://docs.wootric.com/api/
+  terms:
+    - term: NPS
+      label: Net Promoter Score
+      definition: >
+        A customer loyalty metric calculated as the percentage of promoters minus
+        the percentage of detractors. Ranges from -100 to +100. Based on the
+        question: "How likely are you to recommend us to a friend or colleague?"
+      related:
+        - promoter
+        - passive
+        - detractor
+    - term: CSAT
+      label: Customer Satisfaction Score
+      definition: >
+        A metric measuring customer satisfaction with a specific interaction or
+        overall experience, typically on a 1-5 scale.
+    - term: CES
+      label: Customer Effort Score
+      definition: >
+        A metric measuring how much effort a customer had to exert to accomplish
+        a task, typically on a 1-7 scale.
+    - term: promoter
+      label: Promoter
+      definition: >
+        A survey respondent who gives a score of 9 or 10 on an NPS survey.
+        Promoters are loyal enthusiasts who will fuel growth through referrals.
+      score_range: "9-10"
+    - term: passive
+      label: Passive
+      definition: >
+        A survey respondent who gives a score of 7 or 8 on an NPS survey.
+        Passives are satisfied but unenthusiastic customers vulnerable to
+        competitive offerings.
+      score_range: "7-8"
+    - term: detractor
+      label: Detractor
+      definition: >
+        A survey respondent who gives a score of 0 to 6 on an NPS survey.
+        Detractors are unhappy customers who can damage a brand through
+        negative word-of-mouth.
+      score_range: "0-6"
+    - term: end_user
+      label: End User
+      definition: >
+        A customer or user in the Wootric system who can receive surveys and
+        submit responses. Identified by email, external ID, or phone number.
+      fields:
+        - email
+        - external_id
+        - external_created_at
+        - last_surveyed
+        - properties
+        - surveys_disabled
+    - term: response
+      label: Survey Response
+      definition: >
+        A record of an end user's survey submission including their numeric
+        score and optional qualitative feedback text.
+      fields:
+        - score
+        - text
+        - completed
+        - excluded_from_calculations
+        - origin_url
+        - ip_address
+    - term: decline
+      label: Survey Decline
+      definition: >
+        A record indicating that an end user was shown a survey but chose
+        not to complete it. Used for throttling logic.
+      fields:
+        - origin_url
+        - created_at
+    - term: segment
+      label: Segment
+      definition: >
+        A named property dimension used to group end users for analysis.
+        Segments are derived from end user custom properties.
+      fields:
+        - name
+        - data_type
+    - term: survey_template
+      label: Survey Template
+      definition: >
+        A configured survey with specific wording, scale, and language settings.
+        Multiple templates can be created for different survey types and languages.
+    - term: throttling
+      label: Survey Throttling
+      definition: >
+        Logic that prevents end users from being surveyed too frequently.
+        The last_surveyed timestamp is used to enforce throttle windows.
+    - term: excluded_from_calculations
+      label: Excluded from Calculations
+      definition: >
+        A flag on a response that removes it from NPS/CSAT/CES metric computations.
+        Used for test responses or outliers that should not affect scores.
+    - term: external_id
+      label: External ID
+      definition: >
+        A unique identifier from the integrating company's own system used to
+        correlate Wootric end users with records in external databases.
+    - term: properties
+      label: Custom Properties
+      definition: >
+        Arbitrary key-value metadata attached to end users for segmentation,
+        personalization, and filtering. Examples include plan type, company name,
+        MRR, country, and any other business-relevant attributes.
+    - term: origin_url
+      label: Origin URL
+      definition: >
+        The URL of the web page where a survey was displayed or declined.
+        Used for context and segmentation.
+    - term: survey_immediately
+      label: Survey Immediately
+      definition: >
+        A flag on email survey requests that bypasses throttle logic and
+        sends the survey without delay.
+    - term: bounce_report
+      label: Bounce Report
+      definition: >
+        An email deliverability report showing which email survey sends
+        resulted in hard or soft bounces. Generated asynchronously and
+        emailed to the account owner.

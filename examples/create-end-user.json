@@ -1,0 +1,42 @@
+{
+  "title": "Create End User",
+  "description": "Example request body for creating a new end user in Wootric",
+  "request": {
+    "method": "POST",
+    "path": "/v1/end_users",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "email": "jane.doe@example.com",
+      "external_id": "usr_12345",
+      "external_created_at": 1680000000,
+      "properties": {
+        "plan": "enterprise",
+        "company": "Acme Corp",
+        "mrr": 5000,
+        "country": "US"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": 987654,
+      "email": "jane.doe@example.com",
+      "external_id": "usr_12345",
+      "external_created_at": 1680000000,
+      "last_surveyed": null,
+      "surveys_disabled": false,
+      "properties": {
+        "plan": "enterprise",
+        "company": "Acme Corp",
+        "mrr": 5000,
+        "country": "US"
+      },
+      "created_at": 1718236800,
+      "updated_at": 1718236800
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.wootric.com/schemas/survey-response.json",
+  "title": "SurveyResponse",
+  "description": "A survey response capturing an NPS, CSAT, or CES score and optional feedback text",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the response"
+    },
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Survey score; NPS: 9-10 promoter, 7-8 passive, 0-6 detractor"
+    },
+    "text": {
+      "type": ["string", "null"],
+      "description": "Open-ended qualitative feedback provided with the score"
+    },
+    "ip_address": {
+      "type": ["string", "null"],
+      "description": "IP address of the respondent at time of survey"
+    },
+    "origin_url": {
+      "type": ["string", "null"],
+      "description": "URL of the page where the survey was displayed"
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether the survey response was fully completed"
+    },
+    "excluded_from_calculations": {
+      "type": "boolean",
+      "description": "Whether this response is excluded from NPS/CSAT/CES calculations"
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp of when the response was submitted"
+    },
+    "updated_at": {
+      "type": "integer",
+      "description": "Unix timestamp of when the response was last updated"
+    },
+    "end_user": {
+      "$ref": "end-user.json",
+      "description": "The end user who submitted this response"
+    }
+  },
+  "required": ["id", "score"]
+}

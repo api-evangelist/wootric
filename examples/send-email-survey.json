@@ -1,0 +1,40 @@
+{
+  "title": "Send Email Survey",
+  "description": "Example request body for sending an NPS email survey to a list of recipients",
+  "request": {
+    "method": "POST",
+    "path": "/v1/email_survey",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emails": [
+        "customer1@example.com",
+        "customer2@example.com",
+        "customer3@example.com"
+      ],
+      "survey_immediately": false,
+      "subject": "How are we doing? Quick question inside",
+      "intro": "Hi there! We value your feedback and would love to hear from you.",
+      "senders_name": "The Acme Team",
+      "reply_to_email": "feedback@acme.com",
+      "delay": 0,
+      "survey_settings": {
+        "survey_type": "NPS"
+      },
+      "end_user": {
+        "properties": {
+          "campaign": "Q2-2024-retention"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "message": "Email survey queued successfully",
+      "count": 3
+    }
+  }
+}

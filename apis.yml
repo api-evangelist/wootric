@@ -35,6 +35,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.wootric.com/api/
+      - type: OpenAPI
+        url: openapi/wootric-openapi.yml
 common:
   - type: Website
     url: https://wootric.com/

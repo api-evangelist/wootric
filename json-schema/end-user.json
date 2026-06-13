@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.wootric.com/schemas/end-user.json",
+  "title": "EndUser",
+  "description": "A Wootric end user who can receive surveys and provide feedback",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the end user"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "End user email address"
+    },
+    "external_id": {
+      "type": "string",
+      "description": "External identifier from the integrating system"
+    },
+    "external_created_at": {
+      "type": "integer",
+      "description": "Unix timestamp of when the user was created in the external system"
+    },
+    "last_surveyed": {
+      "type": "integer",
+      "description": "Unix timestamp of the last survey sent to this user"
+    },
+    "surveys_disabled": {
+      "type": "boolean",
+      "description": "Whether all surveys are disabled for this user"
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Custom key-value properties for segmentation and personalization"
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp of when this record was created in Wootric"
+    },
+    "updated_at": {
+      "type": "integer",
+      "description": "Unix timestamp of when this record was last updated"
+    }
+  },
+  "required": ["id", "email"]
+}

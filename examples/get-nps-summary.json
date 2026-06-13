@@ -1,0 +1,23 @@
+{
+  "title": "Get NPS Summary",
+  "description": "Example request and response for retrieving NPS summary metrics for a date range",
+  "request": {
+    "method": "GET",
+    "path": "/v1/nps_summary?date[start]=2024-01-01&date[end]=2024-03-31",
+    "headers": {
+      "Authorization": "Bearer {access_token}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "nps": 42,
+      "responses": 1250,
+      "detractors": 175,
+      "passives": 300,
+      "promoters": 775,
+      "response_rate": 31.5,
+      "email_response_rate": 28.2
+    }
+  }
+}

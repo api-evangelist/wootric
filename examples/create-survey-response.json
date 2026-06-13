@@ -1,0 +1,43 @@
+{
+  "title": "Create Survey Response",
+  "description": "Example request body for recording an NPS survey response for an end user",
+  "request": {
+    "method": "POST",
+    "path": "/v1/end_users/987654/responses",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "score": 9,
+      "text": "Love the product! The new dashboard feature saved us hours each week.",
+      "origin_url": "https://app.example.com/dashboard",
+      "ip_address": "203.0.113.42",
+      "end_user": {
+        "properties": {
+          "last_feature_used": "dashboard",
+          "session_count": 47
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": 1122334,
+      "score": 9,
+      "text": "Love the product! The new dashboard feature saved us hours each week.",
+      "origin_url": "https://app.example.com/dashboard",
+      "ip_address": "203.0.113.42",
+      "completed": true,
+      "excluded_from_calculations": false,
+      "created_at": 1718236800,
+      "updated_at": 1718236800,
+      "end_user": {
+        "id": 987654,
+        "email": "jane.doe@example.com",
+        "external_id": "usr_12345"
+      }
+    }
+  }
+}

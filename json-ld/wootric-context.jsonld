@@ -1,0 +1,118 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "wootric": "https://api.wootric.com/vocab/",
+    "EndUser": "wootric:EndUser",
+    "SurveyResponse": "wootric:SurveyResponse",
+    "Decline": "wootric:Decline",
+    "Segment": "wootric:Segment",
+    "NpsSummary": "wootric:NpsSummary",
+    "SurveyTemplate": "wootric:SurveyTemplate",
+    "id": "@id",
+    "email": {
+      "@id": "schema:email",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:integer"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:integer"
+    },
+    "external_id": "wootric:externalId",
+    "external_created_at": {
+      "@id": "wootric:externalCreatedAt",
+      "@type": "xsd:integer"
+    },
+    "last_surveyed": {
+      "@id": "wootric:lastSurveyed",
+      "@type": "xsd:integer"
+    },
+    "surveys_disabled": {
+      "@id": "wootric:surveysDisabled",
+      "@type": "xsd:boolean"
+    },
+    "properties": "wootric:customProperties",
+    "score": {
+      "@id": "wootric:score",
+      "@type": "xsd:integer"
+    },
+    "text": "wootric:feedbackText",
+    "ip_address": "wootric:ipAddress",
+    "origin_url": {
+      "@id": "wootric:originUrl",
+      "@type": "@id"
+    },
+    "completed": {
+      "@id": "wootric:completed",
+      "@type": "xsd:boolean"
+    },
+    "excluded_from_calculations": {
+      "@id": "wootric:excludedFromCalculations",
+      "@type": "xsd:boolean"
+    },
+    "end_user": {
+      "@id": "wootric:endUser",
+      "@type": "wootric:EndUser"
+    },
+    "nps": {
+      "@id": "wootric:nps",
+      "@type": "xsd:decimal"
+    },
+    "responses": {
+      "@id": "wootric:responseCount",
+      "@type": "xsd:integer"
+    },
+    "detractors": {
+      "@id": "wootric:detractorCount",
+      "@type": "xsd:integer"
+    },
+    "passives": {
+      "@id": "wootric:passiveCount",
+      "@type": "xsd:integer"
+    },
+    "promoters": {
+      "@id": "wootric:promoterCount",
+      "@type": "xsd:integer"
+    },
+    "response_rate": {
+      "@id": "wootric:responseRate",
+      "@type": "xsd:decimal"
+    },
+    "email_response_rate": {
+      "@id": "wootric:emailResponseRate",
+      "@type": "xsd:decimal"
+    },
+    "data_type": "wootric:dataType",
+    "email_nps": {
+      "@id": "wootric:emailNpsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "mobile_nps": {
+      "@id": "wootric:mobileNpsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "web_nps": {
+      "@id": "wootric:webNpsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "force_web_survey": {
+      "@id": "wootric:forceWebSurvey",
+      "@type": "xsd:boolean"
+    },
+    "force_mobile_survey": {
+      "@id": "wootric:forceMobileSurvey",
+      "@type": "xsd:boolean"
+    },
+    "surveys_disabled_by_end_user": {
+      "@id": "wootric:surveysDisabledByEndUser",
+      "@type": "xsd:boolean"
+    }
+  }
+}

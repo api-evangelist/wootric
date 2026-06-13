@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.wootric.com/schemas/nps-summary.json",
+  "title": "NpsSummary",
+  "description": "Aggregated NPS metrics for a given date range",
+  "type": "object",
+  "properties": {
+    "nps": {
+      "type": "number",
+      "minimum": -100,
+      "maximum": 100,
+      "description": "Net Promoter Score calculated as (promoters% - detractors%)"
+    },
+    "responses": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of survey responses in the period"
+    },
+    "detractors": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of detractor responses (scores 0-6)"
+    },
+    "passives": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of passive responses (scores 7-8)"
+    },
+    "promoters": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of promoter responses (scores 9-10)"
+    },
+    "response_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Overall survey response rate as a percentage"
+    },
+    "email_response_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Email survey response rate as a percentage"
+    }
+  }
+}
