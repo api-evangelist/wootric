@@ -1,0 +1,23 @@
+name: Wootric API Rate Limits
+description: Rate limiting details for the Wootric REST API.
+url: https://docs.wootric.com/api/
+limits:
+  - name: Default Rate Limit
+    requests: 100
+    period: minute
+    notes: Default rate limit applied to some API endpoints. Contact Wootric to request higher limits.
+headers:
+  - name: X-Rate-Limit-Limit
+    description: Maximum number of requests allowed per minute for the current endpoint.
+  - name: X-Rate-Limit-Remaining
+    description: Number of requests remaining in the current rate limit window.
+  - name: X-Rate-Limit-Reset
+    description: Unix timestamp indicating when the rate limit counter will reset.
+errors:
+  - code: 429
+    message: Too Many Requests
+    description: Returned when the rate limit is exceeded. Retry after the X-Rate-Limit-Reset timestamp.
+notes:
+  - Rate limits are applied per account and per endpoint
+  - Contact Wootric support to request increased rate limits for specific accounts
+  - Token expiration is 2 hours; use refresh tokens to obtain new access tokens without re-authenticating

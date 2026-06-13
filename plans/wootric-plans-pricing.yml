@@ -1,0 +1,44 @@
+name: Wootric Plans and Pricing
+description: Pricing plans for Wootric (now part of InMoment), a customer experience platform for NPS, CSAT, and CES surveys.
+url: https://wootric.com/pricing/
+plans:
+  - name: Professional
+    description: Entry-level plan for single journey point tracking with one CX metric.
+    features:
+      - Choose one metric NPS, CSAT, or CES
+      - Web app, mobile app, email, link, and Intercom Messenger delivery channels
+      - Up to 5 seats
+      - Self-service support
+      - API access
+      - Data export
+      - Email alerts
+      - Single sign-on
+      - Historical data import
+      - Customer profiles
+      - Unlimited responses up to 25k customers
+      - Data segmentation
+      - Auto-categorized feedback themes
+      - Multi-language support
+      - Integrations with Zapier, Slack, Intercom, Zendesk, Freshdesk, Mixpanel, and Segment
+  - name: Growth
+    description: Mid-tier plan for multiple journey points supporting three CX touchpoints.
+    features:
+      - All Professional features
+      - Track three journey points
+      - SMS delivery channel
+      - Up to 10 seats
+      - Premium support
+      - Advanced survey targeting
+      - Additional integrations with Salesforce, HubSpot, ServiceNow, Microsoft, and Heap
+  - name: Voice of the Customer
+    description: Enterprise plan with full analytics and unlimited journey tracking. Contact sales for pricing.
+    features:
+      - All Growth features
+      - CXInsight with text and sentiment analytics
+      - Import and analyze feedback from any source
+      - Custom dashboards and reporting
+      - Unlimited seats
+      - Dedicated support
+notes:
+  - Specific pricing costs are not publicly listed; contact sales for quotes
+  - Wootric is now part of InMoment; enterprise plans available through InMoment at https://inmoment.com/plans-packages/

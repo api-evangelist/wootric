@@ -1,0 +1,23 @@
+name: Wootric FinOps
+description: Financial operations considerations for using the Wootric API and platform.
+url: https://wootric.com/pricing/
+considerations:
+  - name: Plan Selection
+    description: Choose a plan based on number of survey journey points and seats needed. Professional supports one metric and five seats; Growth supports three journey points and ten seats; Voice of the Customer is enterprise with custom pricing.
+  - name: Seat-Based Billing
+    description: Plans are gated by number of user seats. Professional allows up to 5 seats, Growth up to 10 seats, and Voice of the Customer offers unlimited seats.
+  - name: Response Volume
+    description: All plans include unlimited responses up to 25,000 customers. Evaluate whether your customer base exceeds this threshold when selecting a plan.
+  - name: Email Survey Volume
+    description: The API supports sending email surveys to up to 100 recipients per standard REST request or up to 5,000 rows via CSV bulk upload. High-volume email distribution should be planned to stay within rate limits.
+  - name: API Rate Limits
+    description: Default rate limit is 100 requests per minute. High-frequency API integrations may require contact with Wootric to negotiate higher limits, which could affect plan cost.
+  - name: Integration Costs
+    description: Salesforce, HubSpot, ServiceNow, Microsoft, and Heap integrations are only available on Growth and higher plans. Evaluate integration requirements before selecting a plan tier.
+  - name: Regional Hosting
+    description: Wootric operates in US, EU, and AU regions. Ensure the correct regional endpoint is used to comply with data residency requirements and avoid unexpected data transfer costs.
+  - name: Enterprise Pricing
+    description: Wootric is now part of InMoment. Enterprise and Voice of the Customer plan pricing requires contacting sales at https://inmoment.com/plans-packages/. Budget for custom contract negotiations.
+notes:
+  - Wootric acquired by InMoment in 2021; pricing and plans may change as products are integrated
+  - Monitor usage against the 25k customer response volume cap to avoid overage charges or plan upgrades

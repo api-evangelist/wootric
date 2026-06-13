@@ -1,0 +1,63 @@
+aid: wootric
+name: Wootric
+description: Wootric (now part of InMoment) is a customer experience platform with a REST API for managing NPS, CSAT, and CES surveys, accessing feedback responses, and managing customer experience programs. The API supports end user management, survey distribution via email and SMS, response retrieval with promoter/passive/detractor filtering, metric summaries, and multi-region deployments across US, EU, and AU environments.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/wootric/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Customer Experience
+  - NPS
+  - CSAT
+  - CES
+  - Net Promoter Score
+  - Customer Satisfaction
+  - Customer Effort Score
+  - Surveys
+  - Feedback
+  - Voice of the Customer
+apis:
+  - aid: wootric:wootric-api
+    name: Wootric API
+    description: REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.wootric.com/api/
+    baseURL: https://api.wootric.com
+    tags:
+      - NPS
+      - CSAT
+      - CES
+      - Surveys
+      - Customer Experience
+      - Feedback
+    properties:
+      - type: Documentation
+        url: https://docs.wootric.com/api/
+common:
+  - type: Website
+    url: https://wootric.com/
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+  - type: GitHubOrg
+    url: https://github.com/Wootric
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/wootric
+  - type: Blog
+    url: https://www.wootric.com/blog
+  - type: Pricing
+    url: https://wootric.com/pricing/
+  - type: StatusPage
+    url: https://github.com/Wootric/status_pages
+  - type: X
+    url: https://twitter.com/wootric
+  - type: Plans
+    url: plans/wootric-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/wootric-rate-limits.yml
+  - type: FinOps
+    url: finops/wootric-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
