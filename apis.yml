@@ -1,7 +1,7 @@
 aid: wootric
 name: Wootric
 description: Wootric (now part of InMoment) is a customer experience platform with a REST API for managing NPS, CSAT, and CES surveys, accessing feedback responses, and managing customer experience programs. The API supports end user management, survey distribution via email and SMS, response retrieval with promoter/passive/detractor filtering, metric summaries, and multi-region deployments across US, EU, and AU environments.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/wootric/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -22,7 +22,7 @@ apis:
   - aid: wootric:wootric-api
     name: Wootric API
     description: REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.wootric.com/api/
     baseURL: https://api.wootric.com
     tags:
