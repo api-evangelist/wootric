@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/wootric-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token
+    grant. Tokens expire after 2 hours.
+  sources:
+  - openapi/wootric-openapi.yml
