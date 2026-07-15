@@ -38,6 +38,8 @@ apis:
       - type: OpenAPI
         url: openapi/wootric-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/wootric-agentic-access.yml
   - type: DomainSecurity
     url: security/wootric-domain-security.yml
   - type: Authentication
