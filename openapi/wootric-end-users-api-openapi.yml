@@ -1,0 +1,325 @@
+openapi: 3.0.3
+info:
+  title: Wootric Declines End Users API
+  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Wootric API Documentation
+    url: https://docs.wootric.com/api/
+servers:
+- url: https://api.wootric.com
+  description: US production endpoint
+- url: https://api.eu.wootric.com
+  description: EU production endpoint
+- url: https://api.au.wootric.com
+  description: AU production endpoint
+security:
+- BearerAuth: []
+tags:
+- name: End Users
+  description: Manage end user profiles and metadata
+paths:
+  /v1/end_users:
+    get:
+      operationId: listEndUsers
+      summary: Get all end users
+      tags:
+      - End Users
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - name: created
+        in: query
+        description: Filter by creation timestamp (Unix epoch)
+        schema:
+          type: integer
+      - name: updated
+        in: query
+        description: Filter by update timestamp (Unix epoch)
+        schema:
+          type: integer
+      - name: email
+        in: query
+        description: Filter by email address
+        schema:
+          type: string
+          format: email
+      - name: sort_order
+        in: query
+        description: Sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: sort_key
+        in: query
+        description: Field to sort by
+        schema:
+          type: string
+      - name: surveys_disabled
+        in: query
+        description: Filter by surveys disabled flag
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Array of end user objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EndUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createEndUser
+      summary: Create an end user
+      tags:
+      - End Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUserInput'
+      responses:
+        '200':
+          description: Created end user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/end_users/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: End user ID
+      schema:
+        type: integer
+    get:
+      operationId: getEndUser
+      summary: Get a specific end user by ID
+      tags:
+      - End Users
+      parameters:
+      - name: lookup_by_email
+        in: query
+        description: Set to true when the id path param is an email address
+        schema:
+          type: boolean
+      - name: lookup_by_external_id
+        in: query
+        description: Set to true when the id path param is an external ID
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: End user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateEndUser
+      summary: Update an end user
+      tags:
+      - End Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUserInput'
+      responses:
+        '200':
+          description: Updated end user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteEndUser
+      summary: Delete an end user
+      tags:
+      - End Users
+      responses:
+        '200':
+          description: Deleted end user object (deletion scheduled for next day)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/end_users/phone_number/{phone_number}:
+    get:
+      operationId: getEndUserByPhone
+      summary: Get end user by phone number
+      tags:
+      - End Users
+      parameters:
+      - name: phone_number
+        in: path
+        required: true
+        description: Phone number of the end user
+        schema:
+          type: string
+      responses:
+        '200':
+          description: End user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/end_users/{id}/export:
+    get:
+      operationId: exportEndUserData
+      summary: Export end user data
+      tags:
+      - End Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: End user ID
+        schema:
+          type: integer
+      responses:
+        '202':
+          description: Export scheduled; email sent when ready
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+  schemas:
+    EndUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier
+        email:
+          type: string
+          format: email
+          description: End user email address
+        external_id:
+          type: string
+          description: External identifier from your system
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        surveys_disabled:
+          type: boolean
+          description: Whether surveys are disabled for this user
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
+        created_at:
+          type: integer
+          description: Unix timestamp of record creation
+        updated_at:
+          type: integer
+          description: Unix timestamp of last update
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    EndUserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End user email address
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        external_id:
+          type: string
+          description: External identifier from your system
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token grant. Tokens expire after 2 hours.
+
+        '

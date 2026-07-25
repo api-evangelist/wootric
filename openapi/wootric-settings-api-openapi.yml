@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Wootric Declines Settings API
+  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Wootric API Documentation
+    url: https://docs.wootric.com/api/
+servers:
+- url: https://api.wootric.com
+  description: US production endpoint
+- url: https://api.eu.wootric.com
+  description: EU production endpoint
+- url: https://api.au.wootric.com
+  description: AU production endpoint
+security:
+- BearerAuth: []
+tags:
+- name: Settings
+  description: Manage end user survey settings
+paths:
+  /v1/end_users/{id}/settings:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: End user ID
+      schema:
+        type: integer
+    get:
+      operationId: getEndUserSettings
+      summary: Get end user survey settings
+      tags:
+      - Settings
+      responses:
+        '200':
+          description: Settings object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUserSettings'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateEndUserSettings
+      summary: Update end user survey settings
+      tags:
+      - Settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUserSettingsInput'
+      responses:
+        '200':
+          description: Updated settings object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUserSettings'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    EndUserSettings:
+      type: object
+      properties:
+        email_nps:
+          type: boolean
+          description: Whether email NPS surveys are enabled
+        mobile_nps:
+          type: boolean
+          description: Whether mobile NPS surveys are enabled
+        web_nps:
+          type: boolean
+          description: Whether web NPS surveys are enabled
+        force_web_survey:
+          type: boolean
+          description: Force web survey regardless of throttling
+        force_mobile_survey:
+          type: boolean
+          description: Force mobile survey regardless of throttling
+        surveys_disabled_by_end_user:
+          type: boolean
+          description: Whether end user has opted out of surveys
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    EndUserSettingsInput:
+      type: object
+      properties:
+        email_nps:
+          type: boolean
+        mobile_nps:
+          type: boolean
+        web_nps:
+          type: boolean
+        force_web_survey:
+          type: boolean
+        force_mobile_survey:
+          type: boolean
+        surveys_disabled_by_end_user:
+          type: boolean
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token grant. Tokens expire after 2 hours.
+
+        '

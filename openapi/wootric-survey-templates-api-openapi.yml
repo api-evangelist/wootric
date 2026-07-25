@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Wootric Declines Survey Templates API
+  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Wootric API Documentation
+    url: https://docs.wootric.com/api/
+servers:
+- url: https://api.wootric.com
+  description: US production endpoint
+- url: https://api.eu.wootric.com
+  description: EU production endpoint
+- url: https://api.au.wootric.com
+  description: AU production endpoint
+security:
+- BearerAuth: []
+tags:
+- name: Survey Templates
+  description: Access survey template configurations
+paths:
+  /v1/survey_templates:
+    get:
+      operationId: listSurveyTemplates
+      summary: Get survey templates
+      tags:
+      - Survey Templates
+      responses:
+        '200':
+          description: Survey templates configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyTemplates'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    SurveyTemplates:
+      type: object
+      properties:
+        default_template_id:
+          type: integer
+          description: ID of the default template
+        templates:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              languages:
+                type: array
+                items:
+                  type: string
+              configuration:
+                type: object
+                additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token grant. Tokens expire after 2 hours.
+
+        '

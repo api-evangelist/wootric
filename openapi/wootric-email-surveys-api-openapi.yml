@@ -1,0 +1,319 @@
+openapi: 3.0.3
+info:
+  title: Wootric Declines Email Surveys API
+  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Wootric API Documentation
+    url: https://docs.wootric.com/api/
+servers:
+- url: https://api.wootric.com
+  description: US production endpoint
+- url: https://api.eu.wootric.com
+  description: EU production endpoint
+- url: https://api.au.wootric.com
+  description: AU production endpoint
+security:
+- BearerAuth: []
+tags:
+- name: Email Surveys
+  description: Send email surveys and retrieve email statistics
+paths:
+  /v1/email_survey:
+    post:
+      operationId: sendEmailSurvey
+      summary: Send email survey to up to 100 recipients
+      tags:
+      - Email Surveys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailSurveyInput'
+      responses:
+        '200':
+          description: Survey send confirmation
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /v1/email_survey_csv:
+    post:
+      operationId: sendEmailSurveyCsv
+      summary: Send email survey via CSV (up to 5000 rows)
+      tags:
+      - Email Surveys
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmailSurveyCsvInput'
+      responses:
+        '200':
+          description: Survey send confirmation
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /v2/email_stats:
+    get:
+      operationId: getEmailStats
+      summary: Get email statistics
+      tags:
+      - Email Surveys
+      parameters:
+      - name: date_range[start_date]
+        in: query
+        description: Start date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: date_range[end_date]
+        in: query
+        description: End date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Email statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailStats'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/email_stats/sources:
+    get:
+      operationId: getEmailStatsSources
+      summary: Get email stats sources
+      tags:
+      - Email Surveys
+      responses:
+        '200':
+          description: Ongoing sources and send history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailStatsSources'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/email_stats/bounce_report:
+    post:
+      operationId: generateBounceReport
+      summary: Generate bounce report (emailed to account owner)
+      tags:
+      - Email Surveys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date_range:
+                  type: object
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                source:
+                  type: string
+                  description: Source name to filter bounce report
+      responses:
+        '200':
+          description: Bounce report email sent to account owner
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        X-Rate-Limit-Limit:
+          description: Request limit per window
+          schema:
+            type: integer
+        X-Rate-Limit-Remaining:
+          description: Remaining requests in window
+          schema:
+            type: integer
+        X-Rate-Limit-Reset:
+          description: Unix timestamp when limit resets
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    EmailStats:
+      type: object
+      properties:
+        send_requests:
+          type: integer
+          description: Total send requests
+        delivered:
+          type: integer
+          description: Successfully delivered emails
+        opened:
+          type: integer
+          description: Emails opened
+        responded:
+          type: integer
+          description: Emails that received a response
+        bounced:
+          type: integer
+          description: Bounced emails
+        open_rate:
+          type: number
+          description: Percentage of delivered emails opened
+        response_rate:
+          type: number
+          description: Percentage of delivered emails that received a response
+    EmailSurveyInput:
+      type: object
+      required:
+      - emails
+      properties:
+        emails:
+          type: array
+          maxItems: 100
+          description: List of email addresses (max 100)
+          items:
+            type: string
+            format: email
+        survey_immediately:
+          type: boolean
+          description: Send immediately instead of respecting throttle logic
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
+        survey_settings:
+          type: object
+          description: Survey configuration overrides
+          additionalProperties: true
+        subject:
+          type: string
+          description: Email subject line
+        intro:
+          type: string
+          description: Introductory text in the email
+        context:
+          type: string
+          description: Context for personalization
+        senders_name:
+          type: string
+          description: Name shown as sender
+        reply_to_email:
+          type: string
+          format: email
+          description: Reply-to email address
+        delay:
+          type: integer
+          description: Delay in seconds before sending
+        external_ids:
+          type: array
+          items:
+            type: string
+          description: External IDs corresponding to each email
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    EmailSurveyCsvInput:
+      type: object
+      properties:
+        csv:
+          type: string
+          format: binary
+          description: CSV file (or Base64 encoded) with up to 5000 rows
+        survey_immediately:
+          type: boolean
+        survey_settings:
+          type: object
+          additionalProperties: true
+        subject:
+          type: string
+        intro:
+          type: string
+        senders_name:
+          type: string
+        reply_to_email:
+          type: string
+          format: email
+        delay:
+          type: integer
+        delivery_time:
+          type: string
+          description: Scheduled delivery time
+        custom_sender_email:
+          type: string
+          format: email
+        send_to_email_field:
+          type: string
+          description: Name of CSV column containing email addresses
+        unique_identifier_field:
+          type: string
+          description: Name of CSV column containing unique identifiers
+    EmailStatsSources:
+      type: object
+      properties:
+        ongoing_sources:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+        send_history:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+                format: date
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token grant. Tokens expire after 2 hours.
+
+        '

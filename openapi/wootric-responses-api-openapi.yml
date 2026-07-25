@@ -1,0 +1,453 @@
+openapi: 3.0.3
+info:
+  title: Wootric Declines Responses API
+  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Wootric API Documentation
+    url: https://docs.wootric.com/api/
+servers:
+- url: https://api.wootric.com
+  description: US production endpoint
+- url: https://api.eu.wootric.com
+  description: EU production endpoint
+- url: https://api.au.wootric.com
+  description: AU production endpoint
+security:
+- BearerAuth: []
+tags:
+- name: Responses
+  description: Manage NPS/CSAT/CES survey responses
+paths:
+  /v1/responses:
+    get:
+      operationId: listResponses
+      summary: Get all responses
+      tags:
+      - Responses
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/created'
+      - $ref: '#/components/parameters/updated'
+      - $ref: '#/components/parameters/sort_order'
+      - $ref: '#/components/parameters/sort_key'
+      - name: excluded_from_calculations
+        in: query
+        description: Filter responses excluded from calculations
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Array of response objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/responses/{id}:
+    put:
+      operationId: updateResponse
+      summary: Update a response
+      tags:
+      - Responses
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Response ID
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseUpdateInput'
+      responses:
+        '204':
+          description: No content (update successful)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/end_users/{end_user_id}/responses:
+    parameters:
+    - name: end_user_id
+      in: path
+      required: true
+      description: End user ID
+      schema:
+        type: integer
+    get:
+      operationId: listEndUserResponses
+      summary: Get all responses for an end user
+      tags:
+      - Responses
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/created'
+      - $ref: '#/components/parameters/updated'
+      - $ref: '#/components/parameters/sort_order'
+      - $ref: '#/components/parameters/sort_key'
+      - name: excluded_from_calculations
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Array of response objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createResponse
+      summary: Create a response for an end user
+      tags:
+      - Responses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseInput'
+      responses:
+        '200':
+          description: Created response object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/end_users/{end_user_id}/responses/{id}:
+    parameters:
+    - name: end_user_id
+      in: path
+      required: true
+      description: End user ID
+      schema:
+        type: integer
+    - name: id
+      in: path
+      required: true
+      description: Response ID
+      schema:
+        type: integer
+    get:
+      operationId: getEndUserResponse
+      summary: Get a specific response for an end user
+      tags:
+      - Responses
+      responses:
+        '200':
+          description: Single response object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteResponse
+      summary: Delete a response
+      tags:
+      - Responses
+      responses:
+        '204':
+          description: No content (deletion successful)
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/end_users/{end_user_id}/responses/promoters:
+    get:
+      operationId: listPromoterResponses
+      summary: Get promoter responses for an end user (scores 9-10)
+      tags:
+      - Responses
+      parameters:
+      - name: end_user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/created'
+      - $ref: '#/components/parameters/sort_order'
+      responses:
+        '200':
+          description: Array of promoter response objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/end_users/{end_user_id}/responses/passives:
+    get:
+      operationId: listPassiveResponses
+      summary: Get passive responses for an end user (scores 7-8)
+      tags:
+      - Responses
+      parameters:
+      - name: end_user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/created'
+      - $ref: '#/components/parameters/sort_order'
+      responses:
+        '200':
+          description: Array of passive response objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/end_users/{end_user_id}/responses/detractors:
+    get:
+      operationId: listDetractorResponses
+      summary: Get detractor responses for an end user (scores 0-6)
+      tags:
+      - Responses
+      parameters:
+      - name: end_user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/created'
+      - $ref: '#/components/parameters/sort_order'
+      responses:
+        '200':
+          description: Array of detractor response objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SurveyResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ResponseInput:
+      type: object
+      required:
+      - score
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: NPS score (0-10)
+        ip_address:
+          type: string
+          description: IP address of the respondent
+        origin_url:
+          type: string
+          description: URL where survey was displayed
+        text:
+          type: string
+          description: Open-ended feedback text
+        created_at:
+          type: integer
+          description: Unix timestamp for the response
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
+    EndUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier
+        email:
+          type: string
+          format: email
+          description: End user email address
+        external_id:
+          type: string
+          description: External identifier from your system
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        surveys_disabled:
+          type: boolean
+          description: Whether surveys are disabled for this user
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
+        created_at:
+          type: integer
+          description: Unix timestamp of record creation
+        updated_at:
+          type: integer
+          description: Unix timestamp of last update
+    ResponseUpdateInput:
+      type: object
+      properties:
+        completed:
+          type: boolean
+          description: Mark response as completed
+        excluded_from_calculations:
+          type: boolean
+          description: Exclude from NPS calculations
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    SurveyResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier
+        score:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: NPS score (0-10); 9-10 promoter, 7-8 passive, 0-6 detractor
+        text:
+          type: string
+          description: Open-ended feedback text
+        ip_address:
+          type: string
+          description: IP address of the respondent
+        origin_url:
+          type: string
+          description: URL where survey was shown
+        completed:
+          type: boolean
+          description: Whether the survey response is complete
+        excluded_from_calculations:
+          type: boolean
+          description: Whether this response is excluded from NPS calculations
+        created_at:
+          type: integer
+          description: Unix timestamp of response creation
+        updated_at:
+          type: integer
+          description: Unix timestamp of last update
+        end_user:
+          $ref: '#/components/schemas/EndUser'
+  parameters:
+    sort_order:
+      name: sort_order
+      in: query
+      description: Sort direction
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    created:
+      name: created
+      in: query
+      description: Filter by creation timestamp (Unix epoch)
+      schema:
+        type: integer
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    updated:
+      name: updated
+      in: query
+      description: Filter by update timestamp (Unix epoch)
+      schema:
+        type: integer
+    sort_key:
+      name: sort_key
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth 2.0 Bearer token. Obtain via password, client_credentials, or refresh_token grant. Tokens expire after 2 hours.
+
+        '
