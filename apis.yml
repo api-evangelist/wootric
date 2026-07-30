@@ -1,7 +1,20 @@
 aid: wootric
 name: Wootric
 description: Wootric (now part of InMoment) is a customer experience platform with a REST API for managing NPS, CSAT, and CES surveys, accessing feedback responses, and managing customer experience programs. The API supports end user management, survey distribution via email and SMS, response retrieval with promoter/passive/detractor filtering, metric summaries, and multi-region deployments across US, EU, and AU environments.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/wootric.png
 url: https://raw.githubusercontent.com/api-evangelist/wootric/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -19,24 +32,102 @@ tags:
   - Feedback
   - Voice of the Customer
 apis:
-  - aid: wootric:wootric-api
-    name: Wootric API
-    description: REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.wootric.com/api/
-    baseURL: https://api.wootric.com
-    tags:
-      - NPS
-      - CSAT
-      - CES
-      - Surveys
-      - Customer Experience
-      - Feedback
-    properties:
-      - type: Documentation
-        url: https://docs.wootric.com/api/
-      - type: OpenAPI
-        url: openapi/wootric-openapi.yml
+- aid: wootric:wootric-declines-api
+  name: Wootric Declines API
+  description: Manage survey decline records
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Declines
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-declines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-email-surveys-api
+  name: Wootric Email Surveys API
+  description: Send email surveys and retrieve email statistics
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Email Surveys
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-email-surveys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-end-users-api
+  name: Wootric End Users API
+  description: Manage end user profiles and metadata
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - End Users
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-end-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-metrics-api
+  name: Wootric Metrics API
+  description: Retrieve NPS summary metrics
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-responses-api
+  name: Wootric Responses API
+  description: Manage NPS/CSAT/CES survey responses
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Responses
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-responses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-segments-api
+  name: Wootric Segments API
+  description: Access segment definitions
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-segments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-settings-api
+  name: Wootric Settings API
+  description: Manage end user survey settings
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
+- aid: wootric:wootric-survey-templates-api
+  name: Wootric Survey Templates API
+  description: Access survey template configurations
+  humanURL: https://docs.wootric.com/api/
+  baseURL: https://api.wootric.com
+  tags:
+  - Survey Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/wootric-survey-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.wootric.com/api/
 common:
   - type: AgenticAccess
     url: agentic-access/wootric-agentic-access.yml
