@@ -1,0 +1,28 @@
+{
+  "provider": "wootric",
+  "sources": [
+    "wootric-declines-api-openapi.yml",
+    "wootric-email-surveys-api-openapi.yml",
+    "wootric-end-users-api-openapi.yml",
+    "wootric-metrics-api-openapi.yml",
+    "wootric-responses-api-openapi.yml",
+    "wootric-segments-api-openapi.yml",
+    "wootric-settings-api-openapi.yml",
+    "wootric-survey-templates-api-openapi.yml"
+  ],
+  "outputs": [
+    "wootric-declines-api-openapi.yml",
+    "wootric-email-surveys-api-openapi.yml",
+    "wootric-end-users-api-openapi.yml",
+    "wootric-metrics-api-openapi.yml",
+    "wootric-responses-api-openapi.yml",
+    "wootric-segments-api-openapi.yml",
+    "wootric-settings-api-openapi.yml",
+    "wootric-survey-templates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
