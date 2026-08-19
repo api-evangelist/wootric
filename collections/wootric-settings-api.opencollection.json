@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wootric Declines Settings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get end user survey settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ]
+          },
+          "docs": "Get end user survey settings"
+        },
+        {
+          "info": {
+            "name": "Update end user survey settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wootric.com/v1/end_users/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update end user survey settings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

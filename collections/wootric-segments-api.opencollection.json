@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wootric Declines Segments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/segments"
+          },
+          "docs": "Get all segments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

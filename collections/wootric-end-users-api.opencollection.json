@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wootric Declines End Users API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "End Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all end users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "updated",
+                "value": "",
+                "type": "query",
+                "description": "Filter by update timestamp (Unix epoch)"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by email address"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "sort_key",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "surveys_disabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter by surveys disabled flag"
+              }
+            ]
+          },
+          "docs": "Get all end users"
+        },
+        {
+          "info": {
+            "name": "Create an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wootric.com/v1/end_users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an end user"
+        },
+        {
+          "info": {
+            "name": "Get a specific end user by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              },
+              {
+                "name": "lookup_by_email",
+                "value": "",
+                "type": "query",
+                "description": "Set to true when the id path param is an email address"
+              },
+              {
+                "name": "lookup_by_external_id",
+                "value": "",
+                "type": "query",
+                "description": "Set to true when the id path param is an external ID"
+              }
+            ]
+          },
+          "docs": "Get a specific end user by ID"
+        },
+        {
+          "info": {
+            "name": "Update an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wootric.com/v1/end_users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an end user"
+        },
+        {
+          "info": {
+            "name": "Delete an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.wootric.com/v1/end_users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ]
+          },
+          "docs": "Delete an end user"
+        },
+        {
+          "info": {
+            "name": "Get end user by phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/phone_number/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "Phone number of the end user"
+              }
+            ]
+          },
+          "docs": "Get end user by phone number"
+        },
+        {
+          "info": {
+            "name": "Export end user data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:id/export",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ]
+          },
+          "docs": "Export end user data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

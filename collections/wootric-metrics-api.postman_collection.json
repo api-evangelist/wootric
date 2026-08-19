@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "3048b3ae-0387-436e-90c3-2ee2ceecf5bd",
+      "name": "Metrics",
+      "description": {
+        "content": "Retrieve NPS summary metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc3e6878-dfd1-48dd-9dc3-f706672d69dd",
+          "name": "Get NPS summary metrics",
+          "request": {
+            "name": "Get NPS summary metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nps_summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date[start]",
+                  "value": "<date>",
+                  "description": "Start date for the summary period (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "date[end]",
+                  "value": "<date>",
+                  "description": "End date for the summary period (YYYY-MM-DD)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "014b4937-2a59-4bd7-a613-1573aad6ba20",
+              "name": "NPS summary metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nps_summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date[start]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date[end]",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nps\": 112.100247542537,\n  \"responses\": 6877,\n  \"detractors\": 2619,\n  \"passives\": 2382,\n  \"promoters\": 5053,\n  \"response_rate\": 8165.919857781463,\n  \"email_response_rate\": 6174.051271327269\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ace8b089-0fcb-40f7-b3b6-a5aab8aad3c0",
+              "name": "Unauthorized - invalid or missing token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nps_summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date[start]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date[end]",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"status\": 9131\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wootric.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2cf012f5-9738-4e6a-9168-44b194071921",
+    "name": "Wootric Declines Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.\n\n\nContact Support:\n Name: Wootric API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

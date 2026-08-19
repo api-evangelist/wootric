@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wootric Declines Email Surveys API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email Surveys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send email survey to up to 100 recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wootric.com/v1/email_survey",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send email survey to up to 100 recipients"
+        },
+        {
+          "info": {
+            "name": "Send email survey via CSV (up to 5000 rows)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wootric.com/v1/email_survey_csv",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Send email survey via CSV (up to 5000 rows)"
+        },
+        {
+          "info": {
+            "name": "Get email statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v2/email_stats",
+            "params": [
+              {
+                "name": "date_range[start_date]",
+                "value": "",
+                "type": "query",
+                "description": "Start date (YYYY-MM-DD)"
+              },
+              {
+                "name": "date_range[end_date]",
+                "value": "",
+                "type": "query",
+                "description": "End date (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Get email statistics"
+        },
+        {
+          "info": {
+            "name": "Get email stats sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v2/email_stats/sources"
+          },
+          "docs": "Get email stats sources"
+        },
+        {
+          "info": {
+            "name": "Generate bounce report (emailed to account owner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wootric.com/v2/email_stats/bounce_report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate bounce report (emailed to account owner)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

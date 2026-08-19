@@ -1,0 +1,361 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wootric Declines Responses API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/responses",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "updated",
+                "value": "",
+                "type": "query",
+                "description": "Filter by update timestamp (Unix epoch)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "sort_key",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "excluded_from_calculations",
+                "value": "",
+                "type": "query",
+                "description": "Filter responses excluded from calculations"
+              }
+            ]
+          },
+          "docs": "Get all responses"
+        },
+        {
+          "info": {
+            "name": "Update a response",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wootric.com/v1/responses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Response ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a response"
+        },
+        {
+          "info": {
+            "name": "Get all responses for an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "updated",
+                "value": "",
+                "type": "query",
+                "description": "Filter by update timestamp (Unix epoch)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "sort_key",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "excluded_from_calculations",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all responses for an end user"
+        },
+        {
+          "info": {
+            "name": "Create a response for an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a response for an end user"
+        },
+        {
+          "info": {
+            "name": "Get a specific response for an end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses/:id",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Response ID"
+              }
+            ]
+          },
+          "docs": "Get a specific response for an end user"
+        },
+        {
+          "info": {
+            "name": "Delete a response",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses/:id",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path",
+                "description": "End user ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Response ID"
+              }
+            ]
+          },
+          "docs": "Delete a response"
+        },
+        {
+          "info": {
+            "name": "Get promoter responses for an end user (scores 9-10)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses/promoters",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Get promoter responses for an end user (scores 9-10)"
+        },
+        {
+          "info": {
+            "name": "Get passive responses for an end user (scores 7-8)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses/passives",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Get passive responses for an end user (scores 7-8)"
+        },
+        {
+          "info": {
+            "name": "Get detractor responses for an end user (scores 0-6)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wootric.com/v1/end_users/:end_user_id/responses/detractors",
+            "params": [
+              {
+                "name": "end_user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation timestamp (Unix epoch)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Get detractor responses for an end user (scores 0-6)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
