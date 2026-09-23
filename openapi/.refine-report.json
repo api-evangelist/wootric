@@ -1,14 +1,7 @@
 {
   "provider": "wootric",
   "sources": [
-    "wootric-declines-api-openapi.yml",
-    "wootric-email-surveys-api-openapi.yml",
-    "wootric-end-users-api-openapi.yml",
-    "wootric-metrics-api-openapi.yml",
-    "wootric-responses-api-openapi.yml",
-    "wootric-segments-api-openapi.yml",
-    "wootric-settings-api-openapi.yml",
-    "wootric-survey-templates-api-openapi.yml"
+    "_original/wootric-openapi.yml"
   ],
   "outputs": [
     "wootric-declines-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "wootric-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "wootric-declines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-email-surveys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-end-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-responses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-settings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "wootric-survey-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

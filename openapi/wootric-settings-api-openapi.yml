@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wootric Declines Settings API
-  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
-
-    '
+  title: Wootric Settings API
+  description: REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
   version: 1.0.0
   contact:
     name: Wootric API Documentation
@@ -70,25 +68,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     EndUserSettings:
       type: object
@@ -111,15 +90,6 @@ components:
         surveys_disabled_by_end_user:
           type: boolean
           description: Whether end user has opted out of surveys
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     EndUserSettingsInput:
       type: object
       properties:
@@ -135,6 +105,34 @@ components:
           type: boolean
         surveys_disabled_by_end_user:
           type: boolean
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

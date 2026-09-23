@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Wootric Declines Email Surveys API
-  description: 'REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
-
-    '
+  title: Wootric Email Surveys API
+  description: REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs. Wootric (now part of InMoment) supports multi-region deployments across US, EU, and AU environments.
   version: 1.0.0
   contact:
     name: Wootric API Documentation
@@ -137,63 +135,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded
-      headers:
-        X-Rate-Limit-Limit:
-          description: Request limit per window
-          schema:
-            type: integer
-        X-Rate-Limit-Remaining:
-          description: Remaining requests in window
-          schema:
-            type: integer
-        X-Rate-Limit-Reset:
-          description: Unix timestamp when limit resets
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    EmailStats:
-      type: object
-      properties:
-        send_requests:
-          type: integer
-          description: Total send requests
-        delivered:
-          type: integer
-          description: Successfully delivered emails
-        opened:
-          type: integer
-          description: Emails opened
-        responded:
-          type: integer
-          description: Emails that received a response
-        bounced:
-          type: integer
-          description: Bounced emails
-        open_rate:
-          type: number
-          description: Percentage of delivered emails opened
-        response_rate:
-          type: number
-          description: Percentage of delivered emails that received a response
     EmailSurveyInput:
       type: object
       required:
@@ -243,15 +185,6 @@ components:
           items:
             type: string
           description: External IDs corresponding to each email
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     EmailSurveyCsvInput:
       type: object
       properties:
@@ -287,6 +220,15 @@ components:
         unique_identifier_field:
           type: string
           description: Name of CSV column containing unique identifiers
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
     EmailStatsSources:
       type: object
       properties:
@@ -310,6 +252,62 @@ components:
               date:
                 type: string
                 format: date
+    EmailStats:
+      type: object
+      properties:
+        send_requests:
+          type: integer
+          description: Total send requests
+        delivered:
+          type: integer
+          description: Successfully delivered emails
+        opened:
+          type: integer
+          description: Emails opened
+        responded:
+          type: integer
+          description: Emails that received a response
+        bounced:
+          type: integer
+          description: Bounced emails
+        open_rate:
+          type: number
+          description: Percentage of delivered emails opened
+        response_rate:
+          type: number
+          description: Percentage of delivered emails that received a response
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        X-Rate-Limit-Limit:
+          description: Request limit per window
+          schema:
+            type: integer
+        X-Rate-Limit-Remaining:
+          description: Remaining requests in window
+          schema:
+            type: integer
+        X-Rate-Limit-Reset:
+          description: Unix timestamp when limit resets
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
