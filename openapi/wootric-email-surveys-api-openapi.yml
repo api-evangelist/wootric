@@ -135,6 +135,38 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        X-Rate-Limit-Limit:
+          description: Request limit per window
+          schema:
+            type: integer
+        X-Rate-Limit-Remaining:
+          description: Remaining requests in window
+          schema:
+            type: integer
+        X-Rate-Limit-Reset:
+          description: Unix timestamp when limit resets
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     EmailSurveyInput:
       type: object
@@ -229,29 +261,6 @@ components:
         status:
           type: integer
           description: HTTP status code
-    EmailStatsSources:
-      type: object
-      properties:
-        ongoing_sources:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              created_at:
-                type: string
-                format: date-time
-        send_history:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              date:
-                type: string
-                format: date
     EmailStats:
       type: object
       properties:
@@ -276,38 +285,29 @@ components:
         response_rate:
           type: number
           description: Percentage of delivered emails that received a response
-  responses:
-    TooManyRequests:
-      description: Rate limit exceeded
-      headers:
-        X-Rate-Limit-Limit:
-          description: Request limit per window
-          schema:
-            type: integer
-        X-Rate-Limit-Remaining:
-          description: Remaining requests in window
-          schema:
-            type: integer
-        X-Rate-Limit-Reset:
-          description: Unix timestamp when limit resets
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    EmailStatsSources:
+      type: object
+      properties:
+        ongoing_sources:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+        send_history:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+                format: date
   securitySchemes:
     BearerAuth:
       type: http

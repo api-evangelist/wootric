@@ -68,7 +68,50 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    EndUserSettingsInput:
+      type: object
+      properties:
+        email_nps:
+          type: boolean
+        mobile_nps:
+          type: boolean
+        web_nps:
+          type: boolean
+        force_web_survey:
+          type: boolean
+        force_mobile_survey:
+          type: boolean
+        surveys_disabled_by_end_user:
+          type: boolean
     EndUserSettings:
       type: object
       properties:
@@ -90,49 +133,6 @@ components:
         surveys_disabled_by_end_user:
           type: boolean
           description: Whether end user has opted out of surveys
-    EndUserSettingsInput:
-      type: object
-      properties:
-        email_nps:
-          type: boolean
-        mobile_nps:
-          type: boolean
-        web_nps:
-          type: boolean
-        force_web_survey:
-          type: boolean
-        force_mobile_survey:
-          type: boolean
-        surveys_disabled_by_end_user:
-          type: boolean
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

@@ -38,15 +38,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     Segment:
       type: object
       properties:
@@ -59,6 +50,15 @@ components:
         created_at:
           type: integer
           description: Unix timestamp of segment creation
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
   responses:
     Unauthorized:
       description: Unauthorized - invalid or missing token

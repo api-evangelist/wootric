@@ -175,23 +175,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    sort_order:
-      name: sort_order
-      in: query
-      description: Sort direction
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     per_page:
       name: per_page
       in: query
@@ -201,12 +184,14 @@ components:
         minimum: 1
         maximum: 500
         default: 25
-    sort_key:
-      name: sort_key
+    page:
+      name: page
       in: query
-      description: Field to sort by
+      description: Page number for pagination
       schema:
-        type: string
+        type: integer
+        minimum: 1
+        default: 1
     created:
       name: created
       in: query
@@ -219,35 +204,22 @@ components:
       description: Filter by update timestamp (Unix epoch)
       schema:
         type: integer
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    sort_order:
+      name: sort_order
+      in: query
+      description: Sort direction
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    sort_key:
+      name: sort_key
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     EndUser:
       type: object
       properties:
@@ -295,6 +267,15 @@ components:
             properties:
               type: object
               additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
     Decline:
       type: object
       properties:
@@ -312,6 +293,25 @@ components:
           description: Unix timestamp of last update
         end_user:
           $ref: '#/components/schemas/EndUser'
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

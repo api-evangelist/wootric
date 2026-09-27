@@ -215,36 +215,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   schemas:
-    EndUserInput:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: End user email address
-        last_surveyed:
-          type: integer
-          description: Unix timestamp of last survey sent
-        external_created_at:
-          type: integer
-          description: Unix timestamp of user creation in your system
-        external_id:
-          type: string
-          description: External identifier from your system
-        properties:
-          type: object
-          additionalProperties: true
-          description: Custom properties as key-value pairs
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     EndUser:
       type: object
       properties:
@@ -277,15 +266,44 @@ components:
         updated_at:
           type: integer
           description: Unix timestamp of last update
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+    EndUserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End user email address
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        external_id:
+          type: string
+          description: External identifier from your system
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -296,24 +314,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    per_page:
-      name: per_page
-      in: query
-      description: Number of records per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 25
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     BearerAuth:
       type: http
