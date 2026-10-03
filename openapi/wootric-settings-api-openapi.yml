@@ -68,35 +68,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     EndUserSettingsInput:
       type: object
       properties:
@@ -133,6 +105,34 @@ components:
         surveys_disabled_by_end_user:
           type: boolean
           description: Whether end user has opted out of surveys
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

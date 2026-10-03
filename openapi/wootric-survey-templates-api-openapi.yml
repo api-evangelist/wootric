@@ -36,15 +36,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
     SurveyTemplates:
       type: object
       properties:
@@ -67,6 +58,15 @@ components:
               configuration:
                 type: object
                 additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
   responses:
     Unauthorized:
       description: Unauthorized - invalid or missing token

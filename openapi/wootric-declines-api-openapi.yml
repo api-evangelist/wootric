@@ -174,52 +174,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    per_page:
-      name: per_page
-      in: query
-      description: Number of records per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 25
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    created:
-      name: created
-      in: query
-      description: Filter by creation timestamp (Unix epoch)
-      schema:
-        type: integer
-    updated:
-      name: updated
-      in: query
-      description: Filter by update timestamp (Unix epoch)
-      schema:
-        type: integer
-    sort_order:
-      name: sort_order
-      in: query
-      description: Sort direction
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-    sort_key:
-      name: sort_key
-      in: query
-      description: Field to sort by
-      schema:
-        type: string
   schemas:
+    Decline:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier
+        origin_url:
+          type: string
+          description: URL where the survey was declined
+        created_at:
+          type: integer
+          description: Unix timestamp of decline
+        updated_at:
+          type: integer
+          description: Unix timestamp of last update
+        end_user:
+          $ref: '#/components/schemas/EndUser'
+    DeclineInput:
+      type: object
+      properties:
+        origin_url:
+          type: string
+          description: URL where the survey was declined
+        created_at:
+          type: integer
+          description: Unix timestamp for the decline
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
     EndUser:
       type: object
       properties:
@@ -252,21 +239,6 @@ components:
         updated_at:
           type: integer
           description: Unix timestamp of last update
-    DeclineInput:
-      type: object
-      properties:
-        origin_url:
-          type: string
-          description: URL where the survey was declined
-        created_at:
-          type: integer
-          description: Unix timestamp for the decline
-        end_user:
-          type: object
-          properties:
-            properties:
-              type: object
-              additionalProperties: true
     Error:
       type: object
       properties:
@@ -276,32 +248,60 @@ components:
         status:
           type: integer
           description: HTTP status code
-    Decline:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier
-        origin_url:
-          type: string
-          description: URL where the survey was declined
-        created_at:
-          type: integer
-          description: Unix timestamp of decline
-        updated_at:
-          type: integer
-          description: Unix timestamp of last update
-        end_user:
-          $ref: '#/components/schemas/EndUser'
+  parameters:
+    updated:
+      name: updated
+      in: query
+      description: Filter by update timestamp (Unix epoch)
+      schema:
+        type: integer
+    sort_key:
+      name: sort_key
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
+    sort_order:
+      name: sort_order
+      in: query
+      description: Sort direction
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    created:
+      name: created
+      in: query
+      description: Filter by creation timestamp (Unix epoch)
+      schema:
+        type: integer
   responses:
-    BadRequest:
-      description: Bad request
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
