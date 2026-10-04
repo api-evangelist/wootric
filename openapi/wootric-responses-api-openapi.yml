@@ -259,84 +259,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    updated:
-      name: updated
-      in: query
-      description: Filter by update timestamp (Unix epoch)
-      schema:
-        type: integer
-    sort_key:
-      name: sort_key
-      in: query
-      description: Field to sort by
-      schema:
-        type: string
-    sort_order:
-      name: sort_order
-      in: query
-      description: Sort direction
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-    per_page:
-      name: per_page
-      in: query
-      description: Number of records per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 25
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    created:
-      name: created
-      in: query
-      description: Filter by creation timestamp (Unix epoch)
-      schema:
-        type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    EndUser:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier
-        email:
-          type: string
-          format: email
-          description: End user email address
-        external_id:
-          type: string
-          description: External identifier from your system
-        external_created_at:
-          type: integer
-          description: Unix timestamp of user creation in your system
-        last_surveyed:
-          type: integer
-          description: Unix timestamp of last survey sent
-        surveys_disabled:
-          type: boolean
-          description: Whether surveys are disabled for this user
-        properties:
-          type: object
-          additionalProperties: true
-          description: Custom properties as key-value pairs
-        created_at:
-          type: integer
-          description: Unix timestamp of record creation
-        updated_at:
-          type: integer
-          description: Unix timestamp of last update
     ResponseInput:
       type: object
       required:
@@ -380,6 +322,47 @@ components:
             properties:
               type: object
               additionalProperties: true
+    EndUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier
+        email:
+          type: string
+          format: email
+          description: End user email address
+        external_id:
+          type: string
+          description: External identifier from your system
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        surveys_disabled:
+          type: boolean
+          description: Whether surveys are disabled for this user
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
+        created_at:
+          type: integer
+          description: Unix timestamp of record creation
+        updated_at:
+          type: integer
+          description: Unix timestamp of last update
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        status:
+          type: integer
+          description: HTTP status code
     SurveyResponse:
       type: object
       properties:
@@ -414,34 +397,51 @@ components:
           description: Unix timestamp of last update
         end_user:
           $ref: '#/components/schemas/EndUser'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        status:
-          type: integer
-          description: HTTP status code
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - invalid or missing token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    sort_order:
+      name: sort_order
+      in: query
+      description: Sort direction
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    updated:
+      name: updated
+      in: query
+      description: Filter by update timestamp (Unix epoch)
+      schema:
+        type: integer
+    sort_key:
+      name: sort_key
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    created:
+      name: created
+      in: query
+      description: Filter by creation timestamp (Unix epoch)
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http
