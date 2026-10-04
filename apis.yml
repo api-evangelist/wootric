@@ -152,6 +152,9 @@ apis:
   - type: Documentation
     url: https://docs.wootric.com/api/
 common:
+  - type: CapabilityMap
+    url: capabilities/wootric-capability-edges.yml
+    name: Wootric Business Capability Map
   - type: AgenticAccess
     url: agentic-access/wootric-agentic-access.yml
   - type: DomainSecurity

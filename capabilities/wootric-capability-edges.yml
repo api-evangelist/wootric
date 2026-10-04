@@ -1,0 +1,64 @@
+slug: wootric
+provider: Wootric
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Responses
+  spec_file: wootric-responses-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.95
+  evidence: GET /v1/end_users/{end_user_id}/responses/promoters "Get promoter responses for an end user
+    (scores 9-10)"; schema SurveyResponse
+  reason: Operations create, retrieve and classify survey responses into promoters/passives/detractors
+    — the core of NPS survey/feedback management.
+- tag: Email Surveys
+  spec_file: wootric-email-surveys-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.85
+  evidence: POST /v1/email_survey sendEmailSurvey "Send email survey to up to 100 recipients"; "email
+    survey distribution across NPS, CSAT, and CES programs"
+  reason: Operations distribute NPS/CSAT/CES surveys by email and report delivery/bounce stats — this
+    is voice-of-customer survey programme execution, i.e. Customer Feedback Management.
+- tag: Metrics
+  spec_file: wootric-metrics-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.85
+  evidence: GET /v1/nps_summary getNpsSummary "Get NPS summary metrics"; schema NpsSummary
+  reason: NPS summary metrics are the measurement output of an NPS/voice-of-customer programme, squarely
+    Customer Feedback Management.
+- tag: Declines
+  spec_file: wootric-declines-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.8
+  evidence: '"REST API for managing end users, survey responses, declines, settings, metrics... across
+    NPS, CSAT, and CES programs"; POST /v1/end_users/{end_user_id}/declines "Create a decline for an end
+    user"'
+  reason: Declines record an end user declining to answer an NPS/CSAT/CES survey; this is survey/voice-of-customer
+    feedback data management on a customer experience platform.
+- tag: Survey Templates
+  spec_file: wootric-survey-templates-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.7
+  evidence: GET /v1/survey_templates listSurveyTemplates "Get survey templates"; schema SurveyTemplates
+  reason: Survey templates are the instrument definitions for the NPS/CSAT/CES feedback programme; single
+    read-only operation keeps confidence moderate.
