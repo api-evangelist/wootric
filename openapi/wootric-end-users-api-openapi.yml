@@ -215,7 +215,31 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - invalid or missing token
       content:
@@ -228,13 +252,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    EndUserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End user email address
+        last_surveyed:
+          type: integer
+          description: Unix timestamp of last survey sent
+        external_created_at:
+          type: integer
+          description: Unix timestamp of user creation in your system
+        external_id:
+          type: string
+          description: External identifier from your system
+        properties:
+          type: object
+          additionalProperties: true
+          description: Custom properties as key-value pairs
     EndUser:
       type: object
       properties:
@@ -267,26 +305,6 @@ components:
         updated_at:
           type: integer
           description: Unix timestamp of last update
-    EndUserInput:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: End user email address
-        last_surveyed:
-          type: integer
-          description: Unix timestamp of last survey sent
-        external_created_at:
-          type: integer
-          description: Unix timestamp of user creation in your system
-        external_id:
-          type: string
-          description: External identifier from your system
-        properties:
-          type: object
-          additionalProperties: true
-          description: Custom properties as key-value pairs
     Error:
       type: object
       properties:
@@ -296,24 +314,6 @@ components:
         status:
           type: integer
           description: HTTP status code
-  parameters:
-    per_page:
-      name: per_page
-      in: query
-      description: Number of records per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 25
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     BearerAuth:
       type: http

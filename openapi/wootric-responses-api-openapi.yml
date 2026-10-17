@@ -259,7 +259,58 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    updated:
+      name: updated
+      in: query
+      description: Filter by update timestamp (Unix epoch)
+      schema:
+        type: integer
+    per_page:
+      name: per_page
+      in: query
+      description: Number of records per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25
+    sort_key:
+      name: sort_key
+      in: query
+      description: Field to sort by
+      schema:
+        type: string
+    created:
+      name: created
+      in: query
+      description: Filter by creation timestamp (Unix epoch)
+      schema:
+        type: integer
+    sort_order:
+      name: sort_order
+      in: query
+      description: Sort direction
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    page:
+      name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - invalid or missing token
       content:
@@ -272,56 +323,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ResponseInput:
-      type: object
-      required:
-      - score
-      properties:
-        score:
-          type: integer
-          minimum: 0
-          maximum: 10
-          description: NPS score (0-10)
-        ip_address:
-          type: string
-          description: IP address of the respondent
-        origin_url:
-          type: string
-          description: URL where survey was displayed
-        text:
-          type: string
-          description: Open-ended feedback text
-        created_at:
-          type: integer
-          description: Unix timestamp for the response
-        end_user:
-          type: object
-          properties:
-            properties:
-              type: object
-              additionalProperties: true
-    ResponseUpdateInput:
-      type: object
-      properties:
-        completed:
-          type: boolean
-          description: Mark response as completed
-        excluded_from_calculations:
-          type: boolean
-          description: Exclude from NPS calculations
-        end_user:
-          type: object
-          properties:
-            properties:
-              type: object
-              additionalProperties: true
     EndUser:
       type: object
       properties:
@@ -354,6 +356,49 @@ components:
         updated_at:
           type: integer
           description: Unix timestamp of last update
+    ResponseUpdateInput:
+      type: object
+      properties:
+        completed:
+          type: boolean
+          description: Mark response as completed
+        excluded_from_calculations:
+          type: boolean
+          description: Exclude from NPS calculations
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
+    ResponseInput:
+      type: object
+      required:
+      - score
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: NPS score (0-10)
+        ip_address:
+          type: string
+          description: IP address of the respondent
+        origin_url:
+          type: string
+          description: URL where survey was displayed
+        text:
+          type: string
+          description: Open-ended feedback text
+        created_at:
+          type: integer
+          description: Unix timestamp for the response
+        end_user:
+          type: object
+          properties:
+            properties:
+              type: object
+              additionalProperties: true
     Error:
       type: object
       properties:
@@ -397,51 +442,6 @@ components:
           description: Unix timestamp of last update
         end_user:
           $ref: '#/components/schemas/EndUser'
-  parameters:
-    sort_order:
-      name: sort_order
-      in: query
-      description: Sort direction
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-    updated:
-      name: updated
-      in: query
-      description: Filter by update timestamp (Unix epoch)
-      schema:
-        type: integer
-    sort_key:
-      name: sort_key
-      in: query
-      description: Field to sort by
-      schema:
-        type: string
-    page:
-      name: page
-      in: query
-      description: Page number for pagination
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    per_page:
-      name: per_page
-      in: query
-      description: Number of records per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 25
-    created:
-      name: created
-      in: query
-      description: Filter by creation timestamp (Unix epoch)
-      schema:
-        type: integer
   securitySchemes:
     BearerAuth:
       type: http
