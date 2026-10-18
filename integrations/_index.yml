@@ -40,3 +40,45 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
+- slug: wootric-meltano
+  label: Meltano
+  partner: meltano
+  partner_name: Meltano
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  evidence: https://hub.meltano.com/extractors/tap-wootric--singer-io
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Wootric
+    matched_domain: wootric.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-wootric--singer-io
+    maintenance_status:
+    - unknown
+    quality:
+    - bronze
+    builder: 'community (Meltano Hub variant maintainers: singer-io)'
+  status: pending-partner-spec
+  arazzo: null
+- slug: wootric-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A1T7V1Y5A-inmoment
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
