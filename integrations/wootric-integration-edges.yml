@@ -88,10 +88,28 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Slack app
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/292041/inmoment/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - InMoment
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: Reporting and Analytics
 method: searched
 checked:
 - https://github.com/meltano/hub
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/wootric-by-inmoment
 - https://zapier.com/api/v4/apps/
 - slack/integrations/slack-integration-edges.yml
+- zendesk/integrations/zendesk-integration-edges.yml
 source: https://www.twilio.com/docs/segment/connections/destinations/catalog/wootric-by-inmoment
