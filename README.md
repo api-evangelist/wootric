@@ -1,4 +1,4 @@
-# Wootric (wootric)
+# Wootric
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,68 +66,165 @@
 
 Wootric (now part of InMoment) is a customer experience platform with a REST API for managing NPS, CSAT, and CES surveys, accessing feedback responses, and managing customer experience programs. The API supports end user management, survey distribution via email and SMS, response retrieval with promoter/passive/detractor filtering, metric summaries, and multi-region deployments across US, EU, and AU environments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/wootric/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/wootric/refs/heads/main/apis.yml)
+**Areas:** Customer Experience · NPS · CSAT · CES · Customer Satisfaction · Customer Effort Score · Surveys · Feedback · Voice of the Customer
 
-## Scope
+## Wootric on APIs.io
 
-- **Type:** Index
+Everything profiled for Wootric is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/wootric/](https://apis.io/providers/wootric/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-- Customer Experience
-- NPS
-- CSAT
-- CES
-- Net Promoter Score
-- Customer Satisfaction
-- Customer Effort Score
-- Surveys
-- Feedback
-- Voice of the Customer
+- [Wootric Declines API](https://apis.io/apis/wootric/wootric-declines-api/) — Manage survey decline records
+- [Wootric Email Surveys API](https://apis.io/apis/wootric/wootric-email-surveys-api/) — Send email surveys and retrieve email statistics
+- [Wootric End Users API](https://apis.io/apis/wootric/wootric-end-users-api/) — Manage end user profiles and metadata
+- [Wootric Metrics API](https://apis.io/apis/wootric/wootric-metrics-api/) — Retrieve NPS summary metrics
+- [Wootric Responses API](https://apis.io/apis/wootric/wootric-responses-api/) — Manage NPS/CSAT/CES survey responses
+- [Wootric Segments API](https://apis.io/apis/wootric/wootric-segments-api/) — Access segment definitions
+- [Wootric Settings API](https://apis.io/apis/wootric/wootric-settings-api/) — Manage end user survey settings
+- [Wootric Survey Templates API](https://apis.io/apis/wootric/wootric-survey-templates-api/) — Access survey template configurations
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Wootric API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for managing end users, survey responses, declines, settings, metrics, segments, and email survey distribution across NPS, CSAT, and CES programs.
+- [Wootric Agentic Access](https://apis.io/agentic-access/wootric/wootric-agentic-access/)
 
-- **Human URL:** [https://docs.wootric.com/api/](https://docs.wootric.com/api/)
-- **Base URL:** `https://api.wootric.com`
+#### JSON Schema (3)
 
-#### Tags
+The data models the API reads and writes.
 
-- NPS
-- CSAT
-- CES
-- Surveys
-- Customer Experience
-- Feedback
+- [EndUser](https://apis.io/schemas/wootric/end-user/)
+- [NpsSummary](https://apis.io/schemas/wootric/nps-summary/)
+- [SurveyResponse](https://apis.io/schemas/wootric/survey-response/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://docs.wootric.com/api/)
-- [OpenAPI](openapi/wootric-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Linked-data contexts for the provider's vocabulary.
 
-## Common Properties
+- [Wootric Context](https://apis.io/jsonld/wootric/wootric-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Wootric API Vocabulary](https://apis.io/vocabularies/wootric/wootric-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Create End User](https://apis.io/examples/wootric/create-end-user/)
+- [Create Survey Response](https://apis.io/examples/wootric/create-survey-response/)
+- [Get Nps Summary](https://apis.io/examples/wootric/get-nps-summary/)
+- [Send Email Survey](https://apis.io/examples/wootric/send-email-survey/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Wootric Declines API](https://apis.io/collections/wootric/open-wootric-declines-api/)
+- [Wootric Declines Email Surveys API](https://apis.io/collections/wootric/open-wootric-email-surveys-api/)
+- [Wootric Declines End Users API](https://apis.io/collections/wootric/open-wootric-end-users-api/)
+- [Wootric Declines Metrics API](https://apis.io/collections/wootric/open-wootric-metrics-api/)
+- [Wootric Declines Responses API](https://apis.io/collections/wootric/open-wootric-responses-api/)
+- [Wootric Declines Segments API](https://apis.io/collections/wootric/open-wootric-segments-api/)
+- [Wootric Declines Settings API](https://apis.io/collections/wootric/open-wootric-settings-api/)
+- [Wootric Declines Survey Templates API](https://apis.io/collections/wootric/open-wootric-survey-templates-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Wootric — jsonschema rules](https://apis.io/rules/wootric/wootric-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Wootric Authentication](https://apis.io/security/wootric/wootric-authentication/)
+- [Wootric Domain Security](https://apis.io/security/wootric/wootric-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Wootric Plans Pricing](https://apis.io/plans/wootric/wootric-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Wootric Rate Limits](https://apis.io/rate-limits/wootric/wootric-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Wootric Finops](https://apis.io/finops/wootric/wootric-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://wootric.com/)
 - [Documentation](https://docs.wootric.com/api/)
-- [Git Hub Org](https://github.com/Wootric)
-- [LinkedIn](https://www.linkedin.com/company/wootric)
-- [Blog](https://www.wootric.com/blog)
 - [Pricing](https://wootric.com/pricing/)
-- [Status Page](https://github.com/Wootric/status_pages)
-- [X (Twitter)](https://twitter.com/wootric)
-- [Plans](plans/wootric-plans-pricing.yml)
-- [Rate Limits](rate-limits/wootric-rate-limits.yml)
-- [Fin Ops](finops/wootric-finops.yml)
+- [Blog](https://www.wootric.com/blog)
+- [Status](https://github.com/Wootric/status_pages)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 34.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 57.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 18.4 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/wootric/](https://apis.io/providers/wootric/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Wootric: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/wootric/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
